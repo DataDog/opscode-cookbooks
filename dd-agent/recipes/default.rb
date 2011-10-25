@@ -7,35 +7,20 @@
 # All rights reserved - Do Not Redistribute
 #
 
-
 # Only support Debian & Ubuntu (RedHat et al. coming soon)
 case node.platform
 when "debian", "ubuntu"
-    # Get the key
-    execute "sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C7A7DA52" do
-      not_if "apt-key list | grep C7A7DA52"
+    apt_repository 'datadog' do
+      keyserver 'keyserver.ubuntu.com'
+      key 'C7A7DA52'
+      uri 'http://apt.datadoghq.com'
     end
 
-    # Add the repo
-    template "/etc/apt/sources.list.d/datadog.list" do
-        owner "root"
-        group "root"
-        mode 0755
-        variables(
-            :repo => node.datadog.repo
-        )
-    end
-
-    # Update the repo
-    execute "apt-get update"
-
-    package "datadog-agent" do
-        action [ :install, :upgrade ]
-    end
+    package 'datadog-agent'
 
     service "datadog-agent" do
-        action :nothing
-        supports :restart => true
+      action :enable
+      supports :restart => true
     end
 
     directory "/etc/dd-agent" do
