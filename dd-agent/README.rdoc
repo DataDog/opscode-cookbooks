@@ -1,0 +1,17 @@
+= DESCRIPTION:
+Chef recipe to deploy Datadog's agent automatically.
+
+= REQUIREMENTS:
+- python >= 2.6
+- chef >= 0.9
+
+= ATTRIBUTES:
+
+= USAGE:
+1. Import this recipe in your cookbooks
+2. Modify attributes/default.rb and uncomment the api key attribute
+3. Upload the new recipe via: knife cookbook upload dd-agent
+4. Wait until chef-client runs on the target node (or trigger chef-client if you're impatient)
+
+We are not making use of data bags in this recipe as it is unlikely
+that you will have to have more than 1 api key.
