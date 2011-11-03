@@ -13,7 +13,7 @@ when "debian", "ubuntu"
   apt_repository 'datadog' do
     keyserver 'keyserver.ubuntu.com'
     key 'C7A7DA52'
-    uri 'http://apt.datadoghq.com'
+    uri node.datadog.repo
     distribution "unstable"
     components ["main"]
     action :add
