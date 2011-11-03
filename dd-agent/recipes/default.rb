@@ -15,7 +15,7 @@ when "debian", "ubuntu"
     key 'C7A7DA52'
     uri 'http://apt.datadoghq.com'
     distribution "unstable"
-    component ["main"]
+    components ["main"]
     action :add
   end
 
